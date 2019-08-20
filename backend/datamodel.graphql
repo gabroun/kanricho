@@ -1,0 +1,44 @@
+enum Permission {
+  ADMIN
+  USER
+  ITEMCREATE
+  ITEMUPDATE
+  ITEMDELETE
+  PERMISSIONUPDATE
+}
+
+type User {
+  id: ID! @id
+  name: String!
+  email: String! @unique
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission] @scalarList(strategy: RELATION)
+}
+
+type Board {
+  id: ID! @id
+  title: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  lists: [List]!
+}
+
+type List {
+  id: ID! @id
+  title: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  board: Board!
+  cards: [Card]!
+  color: String!
+}
+
+type Card {
+  id: ID! @id
+  content: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  list: List!
+}

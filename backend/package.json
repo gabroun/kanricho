@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "debug": "nodemon -e js,graphql -x node --inspect src/index.js",
+    "start": "nodemon -e js,graphql -x node src/index.js",
+    "playground": "graphql playground --dotenv .env",
+    "deploy": "prisma deploy --env-file .env"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.8.1",
+    "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "graphql": "^14.4.2",
+    "graphql-import": "^0.7.1",
+    "graphql-yoga": "^1.18.1",
+    "nodemon": "^1.19.1",
+    "prisma": "^3.1.0",
+    "prisma-binding": "^2.3.15"
+  }
+}

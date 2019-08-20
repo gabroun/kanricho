@@ -1,0 +1,25 @@
+# import * from './generated/prisma.graphql'
+
+type Mutation {
+  createBoard(title: String!): Board!
+  updateBoard(id: ID!, title: String): Board!
+  deleteBoard(id: ID!): Board!
+  signup(email: String!, password: String!, name: String!): User!
+  createList(
+    title: String!
+    board: BoardCreateOneWithoutListsInput!
+    color: String!
+  ): List!
+  createCard(content: String!, list: ListCreateOneWithoutCardsInput!): Card!
+  deleteList(id: ID!): List!
+  deleteCard(id: ID!): Card!
+  updateList(id: ID!, title: String): List!
+  updateCard(id: ID!, content: String): Card!
+}
+
+type Query {
+  boards: [Board]!
+  board(where: BoardWhereUniqueInput!): Board
+  list(where: ListWhereUniqueInput!): List
+  card(where: CardWhereUniqueInput!): Card
+}
