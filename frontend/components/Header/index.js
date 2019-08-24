@@ -17,11 +17,12 @@ import Router from "next/router";
 const StyledHeader = styled.header`
   height: 32px;
   background: #00000059;
-  padding: 15px 0;
+  padding: 20px 0;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  line-height: 20px;
   a {
     text-decoration: none;
   }
@@ -30,6 +31,7 @@ const StyledHeader = styled.header`
     color: #fff;
     margin: 0;
     text-align: center;
+    font-size: 1.7rem;
     @media screen and (max-width: 767px) {
       font-size: 24px;
       line-height: 24px;

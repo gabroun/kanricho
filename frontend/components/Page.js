@@ -14,7 +14,7 @@ const theme = {
 };
 
 const StyledPage = styled.div`
-  background: white;
+  /* background: white; */
   color: ${props => props.theme.black};
 `;
 
@@ -27,7 +27,8 @@ const Inner = styled.div`
 injectGlobal`
     html {
         box-sizing: border-box;
-        font-size: 10px;
+        /* font-size: 10px; */
+        height: 100%;
     }
     *, *:before, *:after {
         box-sizing: inherit;
@@ -37,11 +38,35 @@ injectGlobal`
         margin: 0;
         font-size: 1.5rem;
         line-height: 2;
+        font-family: Helvetica Neue, Segoe UI, Trebuchet MS, Geneva, Tahoma, sans-serif;
+        height: 100%;
     }
     a {
         text-decoration: none;
         color: ${theme.black};
     }
+    .modal-underlay {
+          position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.6);
+          opacity: 0;
+        }
+
+        .ReactModal__Overlay--after-open {
+          opacity: 1;
+          transition: opacity 0.15s;
+        }
+
+        .modal {
+          position: absolute;
+          display: flex;
+          align-items: flex-start;
+          height: 0;
+          outline: 0;
+        }
 `;
 class Page extends React.Component {
   render() {
