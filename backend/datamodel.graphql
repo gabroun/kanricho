@@ -32,7 +32,7 @@ type List {
   updatedAt: DateTime! @updatedAt
   board: Board!
   cards: [Card]!
-  color: String!
+  # color: String
 }
 
 type Card {
