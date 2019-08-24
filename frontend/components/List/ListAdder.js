@@ -138,7 +138,6 @@ class ListAdder extends React.Component {
           variables={{
             title: this.state.listTitle,
             boardId: this.props.boardId,
-            // listColor: this.randomiseListColor()
           }}
           update={(cache, payload) => this.update(cache, payload, refetch)}
         >
