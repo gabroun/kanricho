@@ -1,0 +1,12 @@
+{
+    "version": 2,
+    "builds": [{
+        "src": "src/index.js", "use": "@now/node-server@canary"
+    }],
+    "routes": [{
+        "src": "/.*", "dest": "src/index.js"
+    }],
+    "env": {
+        "PRISMA_ENDPOINT": "https://task-m-prod-4eadd98197.herokuapp.com/task-management-prod/prod"
+      }
+}
