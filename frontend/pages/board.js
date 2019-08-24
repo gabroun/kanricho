@@ -1,9 +1,9 @@
 import React from "react";
-
-const Home = props => (
+import Board from '../components/Board'
+const SingleBoard = props => (
   <div>
-    <p>board</p>
+    <Board {...props}/>
   </div>
 );
 
-export default Home;
+export default SingleBoard;

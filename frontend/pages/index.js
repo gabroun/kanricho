@@ -1,8 +1,8 @@
 import React from "react";
-
+import Boards from '../components/Dashboard/Boards'
 const Home = props => (
   <div>
-    <p>Hey</p>
+    <Boards {...props}/>
   </div>
 );
 
