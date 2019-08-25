@@ -4,8 +4,8 @@ import { Mutation } from "react-apollo";
 import { ALL_BOARDS_QUERY } from "../Dashboard/Boards";
 import { MdDelete } from "react-icons/md";
 import Error from "../Error";
-import * as S from  "./_boardDeleter";
-import Router from 'next/router'
+import * as S from "./_boardDeleter";
+import Router from "next/router";
 
 const DELETE_BOARD_MUTATION = gql`
   mutation DELETE_BOARD_MUTATION($id: ID!) {
@@ -63,7 +63,7 @@ class BoardDeleter extends React.Component {
                     tabIndex="-1"
                     onClick={() => {
                       deleteBoard();
-                      Router.push({pathname: '/'})
+                      Router.push({ pathname: "/" });
                     }}
                     className="board-deleter__menu-btn"
                   >
