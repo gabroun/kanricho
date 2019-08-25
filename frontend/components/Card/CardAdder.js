@@ -3,8 +3,9 @@ import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { SINGLE_LIST_QUERY } from "../List";
 import Error from "../Error";
+import ClickOutside from "../ClickOutside";
 
-import * as S from  "./_cardAdder";
+import * as S from "./_cardAdder";
 
 const CREATE_CARD_MUTATION = gql`
   mutation CREATE_CARD_MUTATION($content: String!, $listId: ID!) {
@@ -26,29 +27,17 @@ class CardAdder extends React.Component {
       cardContent: ""
     };
     this.handleClick = this.handleClick.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.update = this.update.bind(this);
   }
   handleClick() {
-    !this.state.isOpen
-      ? document.addEventListener("click", this.handleOutsideClick, false)
-      : document.removeEventListener("click", this.handleOutsideClick, false);
-
     this.setState({ isOpen: !this.state.isOpen });
   }
 
   handleChange(e) {
     let cardVal = e.target.value;
     this.setState({ cardContent: cardVal });
-  }
-
-  handleOutsideClick(e) {
-    if (this.node.contains(e.target)) {
-      return;
-    }
-    this.handleClick();
   }
 
   async handleKeyDown(e, createCard) {
@@ -92,38 +81,37 @@ class CardAdder extends React.Component {
     const { refetch } = this.props;
     return (
       <React.Fragment>
-        <S.CardAdder
-          className="card-adder"
-          ref={node => {
-            this.node = node;
-          }}
-        >
+        <S.CardAdder className="card-adder">
           {this.state.isOpen ? (
-            <Mutation
-              mutation={CREATE_CARD_MUTATION}
-              variables={{
-                content: this.state.cardContent,
-                listId: this.props.listId
-              }}
-              update={(cache, payload) => this.update(cache, payload, refetch)}
-            >
-              {(createCard, { error }) => {
-                if (error) return <Error error={error} />;
-                return (
-                  <form onSubmit={this.handleSubmit}>
-                    <textarea
-                      className="card-adder__content"
-                      autoFocus
-                      spellCheck={false}
-                      placeholder="add a new card"
-                      value={this.state.cardContent}
-                      onChange={this.handleChange}
-                      onKeyDown={e => this.handleKeyDown(e, createCard)}
-                    />
-                  </form>
-                );
-              }}
-            </Mutation>
+            <ClickOutside handleClickOutside={this.handleClick}>
+              <Mutation
+                mutation={CREATE_CARD_MUTATION}
+                variables={{
+                  content: this.state.cardContent,
+                  listId: this.props.listId
+                }}
+                update={(cache, payload) =>
+                  this.update(cache, payload, refetch)
+                }
+              >
+                {(createCard, { error }) => {
+                  if (error) return <Error error={error} />;
+                  return (
+                    <form onSubmit={this.handleSubmit}>
+                      <textarea
+                        className="card-adder__content"
+                        autoFocus
+                        spellCheck={false}
+                        placeholder="add a new card"
+                        value={this.state.cardContent}
+                        onChange={this.handleChange}
+                        onKeyDown={e => this.handleKeyDown(e, createCard)}
+                      />
+                    </form>
+                  );
+                }}
+              </Mutation>
+            </ClickOutside>
           ) : (
             <button className="card-adder__btn" onClick={this.handleClick}>
               + Add

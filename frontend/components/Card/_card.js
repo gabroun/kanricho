@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 export const CardContainer = styled.div`
   display: grid;
-    grid-template-columns: 1fr 130px 50px;
-    margin: 8px 5px 0;
-    grid-gap: 10px;
-    .card {
-     /* margin: 8px 5px 0; */
+  grid-template-columns: 1fr 130px 50px;
+  margin: 8px 5px 0;
+  grid-gap: 10px;
+  .card {
+    /* margin: 8px 5px 0; */
     color: #222;
     background-color: white;
     box-shadow: 0 1px 0 rgba(9, 45, 66, 0.25);
@@ -44,40 +44,45 @@ export const CardContainer = styled.div`
     }
 
     &__more {
-    align-self: center;
-    position: relative;
-    justify-self: center;
-    button {
-      background-color: transparent;
-      border: none;
-      outline: none;
-      font-size: 14px;
-      line-height: 18px;
-      cursor: pointer;
-    }
-    &-menu {
-      position: absolute;
-      border-radius: 8px;
-      background-color: #ffffff;
-      box-shadow: 0 4px 17px 6px rgba(0, 0, 0, 0.1);
-      width: 264px;
-      transition: all 50ms ease-in;
-      transition-property: opacity, width;
-      padding: 8px;
-      z-index: 1;
-      right: 0;
-      @media screen and (max-width: 550px) {
-        width: 204px;
+      align-self: center;
+      position: relative;
+      justify-self: center;
+      button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        line-height: 18px;
+        vertical-align: middle;
+        cursor: pointer;
+        svg {
+          font-size: 20px;
+          line-height: 20px;
+        }
+      }
+      &-menu {
+        position: absolute;
+        border-radius: 8px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 17px 6px rgba(0, 0, 0, 0.1);
+        width: 264px;
+        transition: all 50ms ease-in;
+        transition-property: opacity, width;
+        padding: 8px;
+        z-index: 1;
+        right: 0;
+        @media screen and (max-width: 550px) {
+          width: 204px;
+        }
       }
     }
-  }
 
     &__indicator {
       width: 8px;
       height: 100%;
       position: relative;
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
     }
     &__inner {
       display: grid;
@@ -98,4 +103,3 @@ export const CardContainer = styled.div`
     }
   }
 `;
-
