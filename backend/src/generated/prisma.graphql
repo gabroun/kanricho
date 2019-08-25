@@ -401,6 +401,7 @@ type List {
   updatedAt: DateTime!
   board: Board!
   cards(where: CardWhereInput, orderBy: CardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Card!]
+  color: String
 }
 
 type ListConnection {
@@ -414,6 +415,7 @@ input ListCreateInput {
   title: String!
   board: BoardCreateOneWithoutListsInput!
   cards: CardCreateManyWithoutListInput
+  color: String
 }
 
 input ListCreateManyWithoutBoardInput {
@@ -430,12 +432,14 @@ input ListCreateWithoutBoardInput {
   id: ID
   title: String!
   cards: CardCreateManyWithoutListInput
+  color: String
 }
 
 input ListCreateWithoutCardsInput {
   id: ID
   title: String!
   board: BoardCreateOneWithoutListsInput!
+  color: String
 }
 
 type ListEdge {
@@ -452,6 +456,8 @@ enum ListOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  color_ASC
+  color_DESC
 }
 
 type ListPreviousValues {
@@ -459,6 +465,7 @@ type ListPreviousValues {
   title: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  color: String
 }
 
 input ListScalarWhereInput {
@@ -506,6 +513,20 @@ input ListScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  color: String
+  color_not: String
+  color_in: [String!]
+  color_not_in: [String!]
+  color_lt: String
+  color_lte: String
+  color_gt: String
+  color_gte: String
+  color_contains: String
+  color_not_contains: String
+  color_starts_with: String
+  color_not_starts_with: String
+  color_ends_with: String
+  color_not_ends_with: String
   AND: [ListScalarWhereInput!]
   OR: [ListScalarWhereInput!]
   NOT: [ListScalarWhereInput!]
@@ -533,14 +554,17 @@ input ListUpdateInput {
   title: String
   board: BoardUpdateOneRequiredWithoutListsInput
   cards: CardUpdateManyWithoutListInput
+  color: String
 }
 
 input ListUpdateManyDataInput {
   title: String
+  color: String
 }
 
 input ListUpdateManyMutationInput {
   title: String
+  color: String
 }
 
 input ListUpdateManyWithoutBoardInput {
@@ -570,11 +594,13 @@ input ListUpdateOneRequiredWithoutCardsInput {
 input ListUpdateWithoutBoardDataInput {
   title: String
   cards: CardUpdateManyWithoutListInput
+  color: String
 }
 
 input ListUpdateWithoutCardsDataInput {
   title: String
   board: BoardUpdateOneRequiredWithoutListsInput
+  color: String
 }
 
 input ListUpdateWithWhereUniqueWithoutBoardInput {
@@ -642,6 +668,20 @@ input ListWhereInput {
   cards_every: CardWhereInput
   cards_some: CardWhereInput
   cards_none: CardWhereInput
+  color: String
+  color_not: String
+  color_in: [String!]
+  color_not_in: [String!]
+  color_lt: String
+  color_lte: String
+  color_gt: String
+  color_gte: String
+  color_contains: String
+  color_not_contains: String
+  color_starts_with: String
+  color_not_starts_with: String
+  color_ends_with: String
+  color_not_ends_with: String
   AND: [ListWhereInput!]
   OR: [ListWhereInput!]
   NOT: [ListWhereInput!]
