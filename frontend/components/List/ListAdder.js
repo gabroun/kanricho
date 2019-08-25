@@ -4,17 +4,12 @@ import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { SINGLE_BOARD_QUERY } from "../Board";
 import Error from "../Error";
+import ClickOutside from "../ClickOutside";
 
 import * as S from "./_listAdder";
 const CREATE_LIST_MUTATION = gql`
-  mutation CREATE_LIST_MUTATION(
-    $title: String!
-    $boardId: ID!
-  ) {
-    createList(
-      title: $title
-      board: { connect: { id: $boardId } }
-    ) {
+  mutation CREATE_LIST_MUTATION($title: String!, $boardId: ID!) {
+    createList(title: $title, board: { connect: { id: $boardId } }) {
       id
       title
       board {
@@ -41,7 +36,6 @@ class ListAdder extends React.Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
     this.update = this.update.bind(this);
@@ -49,23 +43,11 @@ class ListAdder extends React.Component {
   }
 
   handleClick() {
-    !this.state.isOpen
-      ? document.addEventListener("click", this.handleOutsideClick, false)
-      : document.removeEventListener("click", this.handleOutsideClick, false);
-
     this.setState(() => {
       return {
         isOpen: !this.state.isOpen
       };
     });
-  }
-
-  handleOutsideClick(e) {
-    // ignore click on button itself
-    if (this.node.contains(e.target)) {
-      return;
-    }
-    this.handleClick();
   }
 
   handleChange(e) {
@@ -127,17 +109,12 @@ class ListAdder extends React.Component {
     const { refetch } = this.props;
 
     return (
-      <S.ListAdder
-        className="list-adder"
-        ref={node => {
-          this.node = node;
-        }}
-      >
+      <S.ListAdder className="list-adder">
         <Mutation
           mutation={CREATE_LIST_MUTATION}
           variables={{
             title: this.state.listTitle,
-            boardId: this.props.boardId,
+            boardId: this.props.boardId
           }}
           update={(cache, payload) => this.update(cache, payload, refetch)}
         >
@@ -153,14 +130,16 @@ class ListAdder extends React.Component {
                     + Add new list
                   </button>
                 ) : (
-                  <input
-                    className="list-adder__input"
-                    autoFocus
-                    placeholder="+ Add a new list"
-                    value={this.state.listTitle}
-                    onChange={this.handleChange}
-                    onKeyDown={e => this.handleKeydown(e, createList)}
-                  />
+                  <ClickOutside handleClickOutside={this.handleClick}>
+                    <input
+                      className="list-adder__input"
+                      autoFocus
+                      placeholder="+ Add a new list"
+                      value={this.state.listTitle}
+                      onChange={this.handleChange}
+                      onKeyDown={e => this.handleKeydown(e, createList)}
+                    />
+                  </ClickOutside>
                 )}
               </React.Fragment>
             );

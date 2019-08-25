@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
 import ListDeleter from "./ListDeleter";
 import Error from "../Error";
-
+import ClickOutside from "../ClickOutside";
 import * as S from "./_list";
 
 const SINGLE_LIST_QUERY = gql`
@@ -42,7 +42,6 @@ class List extends React.Component {
     this.handlePopover = this.handlePopover.bind(this);
     this.handleListTitleChange = this.handleListTitleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.handlekeydown = this.handlekeydown.bind(this);
   }
   handlePopover() {
@@ -57,19 +56,11 @@ class List extends React.Component {
   }
 
   handleClick() {
-    !this.state.isOpen
-      ? document.addEventListener("click", this.handleOutsideClick, false)
-      : document.removeEventListener("click", this.handleOutsideClick, false);
     this.setState(() => {
       return {
         isOpen: !this.state.isOpen
       };
     });
-  }
-
-  handleOutsideClick(e) {
-    if (this.node.contains(e.target)) return;
-    this.handleClick();
   }
 
   async handlekeydown(e, updateListTitle) {
@@ -99,10 +90,7 @@ class List extends React.Component {
       <S.ListContainer className="list-container">
         <div className="list">
           <div className="list__header">
-            <div
-              ref={node => (this.node = node)}
-              className="list__header-wrapper"
-            >
+            <div className="list__header-wrapper">
               <Mutation
                 mutation={UPDATE_LIST_MUTATION}
                 variables={{
@@ -122,13 +110,15 @@ class List extends React.Component {
                           <span>{title}</span>
                         </button>
                       ) : (
-                        <input
-                          type="text"
-                          autoFocus
-                          defaultValue={title}
-                          onChange={this.handleListTitleChange}
-                          onKeyDown={e => this.handlekeydown(e, updateList)}
-                        />
+                        <ClickOutside handleClickOutside={this.handleClick}>
+                          <input
+                            type="text"
+                            autoFocus
+                            defaultValue={title}
+                            onChange={this.handleListTitleChange}
+                            onKeyDown={e => this.handlekeydown(e, updateList)}
+                          />
+                        </ClickOutside>
                       )}
                     </React.Fragment>
                   );
@@ -169,18 +159,13 @@ class List extends React.Component {
             </div>
           </div>
           <S.Cards className="cards">
-            <Query
-              query={SINGLE_LIST_QUERY}
-              variables={{ id: this.props.id }}
-
-            >
+            <Query query={SINGLE_LIST_QUERY} variables={{ id: this.props.id }}>
               {({ error, loading, data, refetch }) => {
                 if (error) return <Error error={error} />;
                 if (loading) return <p>Loading!</p>;
                 const { cards } = data.list;
                 return cards.map((card, index) => {
                   return (
-
                     <Card
                       {...card}
                       key={index}

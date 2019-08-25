@@ -3,7 +3,8 @@ import { Mutation, Query } from "react-apollo";
 import gql from "graphql-tag";
 import BoardDeleter from "./BoardDeleter";
 import Error from "../Error";
-import * as S from  "./_boardHeader";
+import * as S from "./_boardHeader";
+import ClickOutside from "../ClickOutside";
 const SINGLE_BOARD_QUERY = gql`
   query SINGLE_BOARD_QUERY($id: ID!) {
     board(where: { id: $id }) {
@@ -32,26 +33,15 @@ class BoardHeader extends React.Component {
 
     this.handleBoardTitleChange = this.handleBoardTitleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.handlekeyDown = this.handlekeyDown.bind(this);
   }
 
   handleClick() {
-    !this.state.isOpen
-      ? document.addEventListener("click", this.handleOutsideClick, false)
-      : document.removeEventListener("click", this.handleOutsideClick, false);
     this.setState(() => {
       return {
         isOpen: !this.state.isOpen
       };
     });
-  }
-
-  handleOutsideClick(e) {
-    if (this.node.contains(e.target)) {
-      return;
-    }
-    this.handleClick();
   }
 
   handleBoardTitleChange(e) {
@@ -86,12 +76,7 @@ class BoardHeader extends React.Component {
   render() {
     return (
       <S.BoardHeader className="board__header">
-        <div
-          className="board__header-title"
-          ref={node => {
-            this.node = node;
-          }}
-        >
+        <div className="board__header-title">
           <Query query={SINGLE_BOARD_QUERY} variables={{ id: this.props.id }}>
             {({ data, loading }) => {
               if (loading) return <p>loading...</p>;
@@ -112,13 +97,17 @@ class BoardHeader extends React.Component {
                             <h1>{this.props.title}</h1>
                           </button>
                         ) : (
-                          <input
-                            type="text"
-                            autoFocus
-                            defaultValue={data.board.title}
-                            onChange={this.handleBoardTitleChange}
-                            onKeyDown={e => this.handlekeyDown(e, updateBoard)}
-                          />
+                          <ClickOutside handleClickOutside={this.handleClick}>
+                            <input
+                              type="text"
+                              autoFocus
+                              defaultValue={data.board.title}
+                              onChange={this.handleBoardTitleChange}
+                              onKeyDown={e =>
+                                this.handlekeyDown(e, updateBoard)
+                              }
+                            />
+                          </ClickOutside>
                         )}
                       </React.Fragment>
                     );
@@ -127,9 +116,8 @@ class BoardHeader extends React.Component {
               );
             }}
           </Query>
-          </div>
-        <BoardDeleter id={this.props.id}  />
-
+        </div>
+        <BoardDeleter id={this.props.id} />
       </S.BoardHeader>
     );
   }

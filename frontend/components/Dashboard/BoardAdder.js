@@ -4,9 +4,10 @@ import slugify from "slugify";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { ALL_BOARDS_QUERY } from "../Dashboard/Boards";
-import Router from 'next/router';
+import Router from "next/router";
 
 import * as S from "./_boardAdder";
+import ClickOutside from "../ClickOutside";
 
 const CREATE_BOARD_MUTATION = gql`
   mutation CREATE_BOARD_MUTATION($title: String!) {
@@ -21,8 +22,6 @@ class BoardAdder extends React.Component {
   constructor(props) {
     super(props);
     this.handleToggleOpen = this.handleToggleOpen.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
-
     this.handleChange = this.handleChange.bind(this);
     this.update = this.update.bind(this);
     this.state = {
@@ -32,24 +31,11 @@ class BoardAdder extends React.Component {
   }
 
   handleToggleOpen(e) {
-    !this.state.isVisible
-      ? document.addEventListener("click", this.handleOutsideClick, false)
-      : document.removeEventListener("click", this.handleOutsideClick, false);
-
     this.setState(() => {
       return {
         isVisible: !this.state.isVisible
       };
     });
-  }
-
-  handleOutsideClick(e) {
-    // ignores click on the component itself
-    if (this.node.contains(e.target)) {
-      return;
-    }
-
-    this.handleToggleOpen();
   }
 
   handleChange(e) {
@@ -78,54 +64,54 @@ class BoardAdder extends React.Component {
     return (
       <React.Fragment>
         <S.BoardAdder>
-          {/* <div className="boards"> */}
           <div
             ref={node => {
               this.node = node;
             }}
           >
             {this.state.isVisible ? (
-              <Mutation
-                mutation={CREATE_BOARD_MUTATION}
-                variables={this.state}
-                update={this.update}
-              >
-                {/* createBoard is the parameter name for mutation function */}
-                {(createBoard, { loading, error }) => (
-                  <form
-                    className="board-adder__form"
-                    onSubmit={async e => {
-                      // stop form from submitting
-                      e.preventDefault();
-                      // call the mutation
-                      const res = await createBoard();
-                      const boardID = res.data.createBoard.id;
+              <ClickOutside handleClickOutside={this.handleToggleOpen}>
+                <Mutation
+                  mutation={CREATE_BOARD_MUTATION}
+                  variables={this.state}
+                  update={this.update}
+                >
+                  {/* createBoard is the parameter name for mutation function */}
+                  {(createBoard, { loading, error }) => (
+                    <form
+                      className="board-adder__form"
+                      onSubmit={async e => {
+                        // stop form from submitting
+                        e.preventDefault();
+                        // call the mutation
+                        const res = await createBoard();
+                        const boardID = res.data.createBoard.id;
 
-                      // change them to single item page
+                        // change them to single item page
 
-                      Router.push({
-                        pathname: '/board',
-                        query: { id: boardID },
-                      });
-
-                    }}
-                  >
-                    <fieldset disabled={loading} aria-busy={loading}>
-                      <input
-                        type="text"
-                        value={this.state.title}
-                        onChange={this.handleChange}
-                      />
-                      <button
-                        className="submit-board"
-                        disabled={this.state.title === ""}
-                      >
-                        Create
-                      </button>
-                    </fieldset>
-                  </form>
-                )}
-              </Mutation>
+                        Router.push({
+                          pathname: "/board",
+                          query: { id: boardID }
+                        });
+                      }}
+                    >
+                      <fieldset disabled={loading} aria-busy={loading}>
+                        <input
+                          type="text"
+                          value={this.state.title}
+                          onChange={this.handleChange}
+                        />
+                        <button
+                          className="submit-board"
+                          disabled={this.state.title === ""}
+                        >
+                          Create
+                        </button>
+                      </fieldset>
+                    </form>
+                  )}
+                </Mutation>
+              </ClickOutside>
             ) : (
               <button
                 onClick={this.handleToggleOpen}
@@ -135,7 +121,6 @@ class BoardAdder extends React.Component {
               </button>
             )}
           </div>
-          {/* </S.BoardAdder> */}
         </S.BoardAdder>
       </React.Fragment>
     );

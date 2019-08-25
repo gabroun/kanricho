@@ -1,18 +1,18 @@
 // import Nav from './Nav';
 import styled from "styled-components";
 import Link from "next/link";
-// import NProgress from 'nprogress';
+import NProgress from "nprogress";
 import Router from "next/router";
 
-// Router.onRouteChangeStart = () => {
-//   NProgress.start();
-// };
-// Router.onRouteChangeComplete = () => {
-//   NProgress.done();
-// };
-// Router.onRouteChangeError = () => {
-//   NProgress.done();
-// };
+Router.onRouteChangeStart = () => {
+  NProgress.start();
+};
+Router.onRouteChangeComplete = () => {
+  NProgress.done();
+};
+Router.onRouteChangeError = () => {
+  NProgress.done();
+};
 
 const StyledHeader = styled.header`
   height: 32px;
