@@ -58,6 +58,7 @@ export const CardContainer = styled.div`
         svg {
           font-size: 20px;
           line-height: 20px;
+          vertical-align: middle;
         }
       }
       &-menu {
