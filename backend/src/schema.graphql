@@ -1,10 +1,15 @@
 # import * from './generated/prisma.graphql'
+type SuccessMessage {
+  message: String
+}
 
 type Mutation {
   createBoard(title: String!): Board!
   updateBoard(id: ID!, title: String): Board!
   deleteBoard(id: ID!): Board!
   signup(email: String!, password: String!, name: String!): User!
+  signin(email: String!, password: String!): User!
+  signout: SuccessMessage
   createList(
     title: String!
     board: BoardCreateOneWithoutListsInput!
