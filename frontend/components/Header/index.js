@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import NProgress from "nprogress";
 import Router from "next/router";
+import User from "../User";
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
@@ -55,6 +56,13 @@ const Header = () => {
             <h1 className="header__title">React Task Management</h1>
           </a>
         </Link>
+        <User>
+          {({ data: { me } }) => {
+            console.log(me);
+            if (me) return <p>{me.name}</p>;
+            return null;
+          }}
+        </User>
       </StyledHeader>
       <StyledSvg
         className="header__background"
