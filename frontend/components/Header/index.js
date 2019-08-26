@@ -5,6 +5,8 @@ import NProgress from "nprogress";
 import Router from "next/router";
 import User from "../User";
 import Signout from "../Signout";
+import AccountNav from "../AccountNav";
+
 Router.onRouteChangeStart = () => {
   NProgress.start();
 };
@@ -18,10 +20,11 @@ Router.onRouteChangeError = () => {
 const StyledHeader = styled.header`
   height: 32px;
   background: #00000059;
-  padding: 20px 0;
+  padding: 30px 0;
   width: 100%;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 0.2fr;
+  align-content: center;
   align-items: center;
   line-height: 20px;
   a {
@@ -53,16 +56,10 @@ const Header = () => {
       <StyledHeader>
         <Link href="/">
           <a>
-            <h1 className="header__title">React Task Management</h1>
+            <h1 className="header__title">Task Management</h1>
           </a>
         </Link>
-        <User>
-          {({ data: { me } }) => {
-            if (me) return <p>{me.name}</p>;
-            return null;
-          }}
-        </User>
-        <Signout />
+        <AccountNav />
       </StyledHeader>
       <StyledSvg
         className="header__background"

@@ -10,6 +10,8 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): User!
   signin(email: String!, password: String!): User!
   signout: SuccessMessage
+  requestReset(email: String!): SuccessMessage
+  resetPassword(resetToken: String!, password: String!, confirmPassword: String!): User!
   createList(
     title: String!
     board: BoardCreateOneWithoutListsInput!
@@ -28,4 +30,11 @@ type Query {
   list(where: ListWhereUniqueInput!): List
   card(where: CardWhereUniqueInput!): Card
   me: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  permissions: [Permission!]!
 }

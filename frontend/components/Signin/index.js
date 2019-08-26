@@ -2,9 +2,20 @@ import React from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import Error from "../Error";
-
+import Link from "next/link";
 import styled, { keyframes } from "styled-components";
 import { CURRENT_USER_QUERY } from "../User";
+import Router from "next/router";
+const SIGNIN_MUTATION = gql`
+  mutation SINGIN_MUTATION($email: String!, $password: String!) {
+    signin(email: $email, password: $password) {
+      name
+      id
+      email
+    }
+  }
+`;
+
 const loading = keyframes`
   from {
     background-position: 0 0;
@@ -74,16 +85,6 @@ const StyledForm = styled.form`
   }
 `;
 
-const SIGNIN_MUTATION = gql`
-  mutation SINGIN_MUTATION($email: String!, $password: String!) {
-    signin(email: $email, password: $password) {
-      name
-      id
-      email
-    }
-  }
-`;
-
 class Signin extends React.Component {
   constructor(props) {
     super(props);
@@ -112,6 +113,9 @@ class Signin extends React.Component {
                 const res = await signin();
 
                 this.setState({ name: "", email: "", password: "" });
+                Router.push({
+                  pathname: "/dashboard"
+                });
               }}
             >
               <fieldset disabled={loading} aria-busy={loading}>
@@ -138,6 +142,11 @@ class Signin extends React.Component {
                   />
                 </label>
                 <button type="submit">Sign in</button>
+                <Link href="/forgotpassword">
+                  <a>
+                    <span className="header__title">Forgot your password?</span>
+                  </a>
+                </Link>
               </fieldset>
             </StyledForm>
           );
