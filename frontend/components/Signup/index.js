@@ -3,6 +3,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import Error from "../Error";
 import StyledForm from "./_signup";
+import { CURRENT_USER_QUERY } from "../User";
 
 const SIGNUP_MUTATION = gql`
   mutation SINGUP_MUTATION(
@@ -33,7 +34,11 @@ class Signup extends React.Component {
   }
   render() {
     return (
-      <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={SIGNUP_MUTATION}
+        variables={this.state}
+        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+      >
         {(signup, { error, loading }) => {
           return (
             <StyledForm
@@ -41,23 +46,13 @@ class Signup extends React.Component {
               onSubmit={async e => {
                 e.preventDefault();
                 const res = await signup();
-                console.log(res);
+
                 this.setState({ name: "", email: "", password: "" });
               }}
             >
               <fieldset disabled={loading} aria-busy={loading}>
                 <h2>Sign Up</h2>
                 <Error error={error} />
-                <label htmlFor="email">
-                  Email
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="email"
-                    value={this.state.email}
-                    onChange={this.saveToState}
-                  />
-                </label>
                 <label htmlFor="name">
                   Name
                   <input
@@ -65,6 +60,16 @@ class Signup extends React.Component {
                     name="name"
                     placeholder="name"
                     value={this.state.name}
+                    onChange={this.saveToState}
+                  />
+                </label>
+                <label htmlFor="email">
+                  Email
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="email"
+                    value={this.state.email}
                     onChange={this.saveToState}
                   />
                 </label>

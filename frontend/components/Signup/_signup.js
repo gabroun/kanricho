@@ -16,8 +16,8 @@ const Form = styled.form`
   background: rgba(0, 0, 0, 0.02);
   border: 5px solid white;
   padding: 20px;
-  font-size: 1.2rem;
-  line-height: 1.2;
+  font-size: 1rem;
+  line-height: 1;
   font-weight: 600;
   label {
     display: block;

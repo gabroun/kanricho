@@ -4,7 +4,7 @@ import Link from "next/link";
 import NProgress from "nprogress";
 import Router from "next/router";
 import User from "../User";
-
+import Signout from "../Signout";
 Router.onRouteChangeStart = () => {
   NProgress.start();
 };
@@ -58,11 +58,11 @@ const Header = () => {
         </Link>
         <User>
           {({ data: { me } }) => {
-            console.log(me);
             if (me) return <p>{me.name}</p>;
             return null;
           }}
         </User>
+        <Signout />
       </StyledHeader>
       <StyledSvg
         className="header__background"
