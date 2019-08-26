@@ -13,6 +13,7 @@ const SINGLE_LIST_QUERY = gql`
     list(where: { id: $id }) {
       id
       title
+      color
       cards {
         content
         id
@@ -163,7 +164,7 @@ class List extends React.Component {
               {({ error, loading, data, refetch }) => {
                 if (error) return <Error error={error} />;
                 if (loading) return <p>Loading!</p>;
-                const { cards } = data.list;
+                const { cards, color } = data.list;
                 return cards.map((card, index) => {
                   return (
                     <Card
@@ -171,7 +172,7 @@ class List extends React.Component {
                       key={index}
                       refetch={refetch}
                       listId={this.props.id}
-                      // listColor={color}
+                      listColor={color}
                     />
                   );
                 });

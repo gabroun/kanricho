@@ -1,9 +1,9 @@
 enum Permission {
   ADMIN
   USER
-  ITEMCREATE
-  ITEMUPDATE
-  ITEMDELETE
+  BOARDCREATE
+  BOARDUPDATE
+  BOARDDELETE
   PERMISSIONUPDATE
 }
 
@@ -32,7 +32,7 @@ type List {
   updatedAt: DateTime! @updatedAt
   board: Board!
   cards: [Card]!
-  # color: String
+  color: String
 }
 
 type Card {

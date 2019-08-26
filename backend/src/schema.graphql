@@ -8,6 +8,7 @@ type Mutation {
   createList(
     title: String!
     board: BoardCreateOneWithoutListsInput!
+    color: String
   ): List!
   createCard(content: String!, list: ListCreateOneWithoutCardsInput!): Card!
   deleteList(id: ID!): List!
@@ -21,4 +22,5 @@ type Query {
   board(where: BoardWhereUniqueInput!): Board
   list(where: ListWhereUniqueInput!): List
   card(where: CardWhereUniqueInput!): Card
+  me: User
 }

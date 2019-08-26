@@ -8,10 +8,19 @@ import ClickOutside from "../ClickOutside";
 
 import * as S from "./_listAdder";
 const CREATE_LIST_MUTATION = gql`
-  mutation CREATE_LIST_MUTATION($title: String!, $boardId: ID!) {
-    createList(title: $title, board: { connect: { id: $boardId } }) {
+  mutation CREATE_LIST_MUTATION(
+    $title: String!
+    $boardId: ID!
+    $listColor: String
+  ) {
+    createList(
+      title: $title
+      board: { connect: { id: $boardId } }
+      color: $listColor
+    ) {
       id
       title
+      color
       board {
         title
       }
@@ -31,7 +40,12 @@ class ListAdder extends React.Component {
         mediumTurquiose: "#4ECDC4",
         prussianBlue: "#003459",
         pastelRed: "#FF6B6B",
-        maize: "#FFE66D"
+        maize: "#FFE66D",
+        infraRed: "#EF476F",
+        orangeYellow: "#FFD166",
+        caribbeanGreen: "#06D6A0",
+        cyanBlue: "#118AB2",
+        warmBlack: "#073B4C"
       }
     };
 
@@ -114,7 +128,8 @@ class ListAdder extends React.Component {
           mutation={CREATE_LIST_MUTATION}
           variables={{
             title: this.state.listTitle,
-            boardId: this.props.boardId
+            boardId: this.props.boardId,
+            listColor: this.randomiseListColor()
           }}
           update={(cache, payload) => this.update(cache, payload, refetch)}
         >

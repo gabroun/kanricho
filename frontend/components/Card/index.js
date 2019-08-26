@@ -30,6 +30,7 @@ class Card extends React.Component {
 
   async handleClick(deleteCard) {
     const res = await deleteCard();
+    this.handleCardMoreClick();
   }
 
   update(cache, payload, refetch) {
@@ -46,6 +47,7 @@ class Card extends React.Component {
 
     cache.writeQuery({ query: SINGLE_LIST_QUERY, data });
     refetch();
+    location.reload();
   }
 
   handleModalClick() {
@@ -57,13 +59,15 @@ class Card extends React.Component {
   }
 
   render() {
-    const { content, refetch, id } = this.props;
+    const { content, refetch, id, listColor } = this.props;
     return (
       <S.CardContainer className="card-container">
         <div className="card" ref={ref => (this.ref = ref)}>
           <div
             className="card__indicator"
-            style={{ backgroundColor: '#fff' }}
+            style={{
+              backgroundColor: listColor !== undefined ? listColor : "#fff"
+            }}
           />
           <div className="card__inner">
             <span>{content}</span>
