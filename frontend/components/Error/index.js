@@ -1,9 +1,9 @@
 import React from "react";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const ErrorStyles = styled.div`
-  padding: 2rem;
+  padding: 1.5rem;
   background: white;
   margin: 2rem 0;
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -15,10 +15,7 @@ const ErrorStyles = styled.div`
   strong {
     margin-right: 1rem;
   }
-
 `;
-
-
 
 const DisplayError = ({ error }) => {
   if (!error || !error.message) return null;
