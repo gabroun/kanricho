@@ -11,7 +11,7 @@ const typeDefs = importSchema(path.resolve(__dirname + "/schema.graphql"));
 
 // create the GraphQL Yoga Server
 function createServer() {
-  return new ApolloServer({
+  return new GraphQLServer({
     typeDefs,
     resolvers: {
       Mutation,

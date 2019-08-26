@@ -22,4 +22,5 @@ type Query {
   board(where: BoardWhereUniqueInput!): Board
   list(where: ListWhereUniqueInput!): List
   card(where: CardWhereUniqueInput!): Card
+  me: User
 }
