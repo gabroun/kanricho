@@ -6,11 +6,19 @@ const {makeAniceEmail, transport} = require('../mail')
 
 const Mutations = {
   async createBoard(parent, args, ctx, info) {
-    // todo check if user is logged in
+    if(!ctx.request.userId) {
+      throw new Error('You must be logged in to do that!');
+    }
 
     const board = await ctx.db.mutation.createBoard(
       {
         data: {
+          // relationship between board and user
+          user: {
+            connect: {
+              id: ctx.request.userId
+            }
+          },
           ...args
         }
       },
