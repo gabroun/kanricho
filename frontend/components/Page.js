@@ -36,8 +36,8 @@ injectGlobal`
     body {
         padding: 0;
         margin: 0;
-        font-size: 1.5rem;
-        line-height: 2;
+        /* font-size: 1.5rem;
+        line-height: 2; */
         font-family: Helvetica Neue, Segoe UI, Trebuchet MS, Geneva, Tahoma, sans-serif;
         height: 100%;
     }

@@ -5,7 +5,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { ALL_BOARDS_QUERY } from "../Dashboard/Boards";
 import Router from "next/router";
-
+import Error from "../Error";
 import * as S from "./_boardAdder";
 import ClickOutside from "../ClickOutside";
 
@@ -64,11 +64,7 @@ class BoardAdder extends React.Component {
     return (
       <React.Fragment>
         <S.BoardAdder>
-          <div
-            ref={node => {
-              this.node = node;
-            }}
-          >
+          <div>
             {this.state.isVisible ? (
               <ClickOutside handleClickOutside={this.handleToggleOpen}>
                 <Mutation
@@ -78,37 +74,40 @@ class BoardAdder extends React.Component {
                 >
                   {/* createBoard is the parameter name for mutation function */}
                   {(createBoard, { loading, error }) => (
-                    <form
-                      className="board-adder__form"
-                      onSubmit={async e => {
-                        // stop form from submitting
-                        e.preventDefault();
-                        // call the mutation
-                        const res = await createBoard();
-                        const boardID = res.data.createBoard.id;
+                    <>
+                      <Error error={error} />
+                      <form
+                        className="board-adder__form"
+                        onSubmit={async e => {
+                          // stop form from submitting
+                          e.preventDefault();
+                          // call the mutation
+                          const res = await createBoard();
+                          const boardID = res.data.createBoard.id;
 
-                        // change them to single item page
+                          // change them to single item page
 
-                        Router.push({
-                          pathname: "/board",
-                          query: { id: boardID }
-                        });
-                      }}
-                    >
-                      <fieldset disabled={loading} aria-busy={loading}>
-                        <input
-                          type="text"
-                          value={this.state.title}
-                          onChange={this.handleChange}
-                        />
-                        <button
-                          className="submit-board"
-                          disabled={this.state.title === ""}
-                        >
-                          Create
-                        </button>
-                      </fieldset>
-                    </form>
+                          Router.push({
+                            pathname: "/board",
+                            query: { id: boardID }
+                          });
+                        }}
+                      >
+                        <fieldset disabled={loading} aria-busy={loading}>
+                          <input
+                            type="text"
+                            value={this.state.title}
+                            onChange={this.handleChange}
+                          />
+                          <button
+                            className="submit-board"
+                            disabled={this.state.title === ""}
+                          >
+                            Create
+                          </button>
+                        </fieldset>
+                      </form>
+                    </>
                   )}
                 </Mutation>
               </ClickOutside>

@@ -1,8 +1,11 @@
 import React from "react";
 import Boards from "../components/Dashboard/Boards";
+import SignedIn from "../components/SignedIn";
 const Home = props => (
   <div>
-    <Boards {...props} />
+    <SignedIn>
+      <Boards {...props} />
+    </SignedIn>
   </div>
 );
 

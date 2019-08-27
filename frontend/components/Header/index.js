@@ -23,14 +23,19 @@ const StyledHeader = styled.header`
   padding: 30px 0;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 0.2fr;
+  grid-template-columns: 0.2fr 1fr 0.2fr;
   align-content: center;
   align-items: center;
   line-height: 20px;
   a {
     text-decoration: none;
+    display: inline-flex;
   }
 
+  .header__container {
+    display: flex;
+    justify-content: center;
+  }
   .header__title {
     color: #fff;
     margin: 0;
@@ -54,11 +59,14 @@ const Header = () => {
   return (
     <React.Fragment>
       <StyledHeader>
-        <Link href="/">
-          <a>
-            <h1 className="header__title">Task Management</h1>
-          </a>
-        </Link>
+        <span />
+        <div className="header__container">
+          <Link href="/">
+            <a>
+              <h1 className="header__title">Task Management</h1>
+            </a>
+          </Link>
+        </div>
         <AccountNav />
       </StyledHeader>
       <StyledSvg
