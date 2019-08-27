@@ -1,17 +1,17 @@
 import React from "react";
-import Header from "../Header";
 import BoardAdder from "./BoardAdder";
 import Link from "next/link";
-import slugify from "slugify";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import Loading from "../Loading";
 
-import * as S from './_boards'
+import Loading from "../Loading";
+import { CURRENT_USER_QUERY } from "../User";
+
+import * as S from "./_boards";
 
 const ALL_BOARDS_QUERY = gql`
-  query ALL_BOARDS_QUERY {
-    boards {
+  query ALL_BOARDS_QUERY($email: String!) {
+    boards(where: { user: { email: $email } }) {
       title
       id
     }
@@ -24,41 +24,46 @@ class Boards extends React.Component {
 
     return (
       <React.Fragment>
-        {/* <Header /> */}
-        <S.BoardsContainer className="boards-container">
-          <h1>Boards</h1>
-          <Query query={ALL_BOARDS_QUERY} fetchPolicy="cache-and-network">
-            {({ loading, data }) => {
-              if (loading) return <Loading />;
-              const { boards } = data;
+        <Query query={CURRENT_USER_QUERY}>
+          {({ data: { me }, loading }) => {
+            return (
+              <S.BoardsContainer className="boards-container">
+                <h1>Boards</h1>
+                <Query
+                  query={ALL_BOARDS_QUERY}
+                  variables={{ email: me.email }}
+                  fetchPolicy="cache-and-network"
+                >
+                  {({ loading, data }) => {
+                    if (loading) return <Loading />;
+                    const { boards } = data;
 
-              return (
-                <div className="boards">
-                  {boards.map(board => {
-                    let id = board.id;
                     return (
-                      // <Link
-                      //   key={id}
-                      //   href={`/b/${id}/${slugify(board.title, {
-                      //     lower: true
-                      //   })}`}
-                      // >
-                      <Link key={id}
-                      href={{
-                        pathname: "/board",
-                        query: {id: id}
-                      }}>
-                        <a>{board.title}</a>
-                        </Link>
-                    );
-                  })}
+                      <div className="boards">
+                        {boards.map(board => {
+                          let id = board.id;
+                          return (
+                            <Link
+                              key={id}
+                              href={{
+                                pathname: "/board",
+                                query: { id: id }
+                              }}
+                            >
+                              <a>{board.title}</a>
+                            </Link>
+                          );
+                        })}
 
-                  <BoardAdder history={history} />
-                </div>
-              );
-            }}
-          </Query>
-        </S.BoardsContainer>
+                        <BoardAdder history={history} />
+                      </div>
+                    );
+                  }}
+                </Query>
+              </S.BoardsContainer>
+            );
+          }}
+        </Query>
       </React.Fragment>
     );
   }

@@ -25,7 +25,8 @@ type Mutation {
 }
 
 type Query {
-  boards: [Board]!
+  # boards: [Board]!
+  boards(where: BoardWhereInput!): [Board]!
   board(where: BoardWhereUniqueInput!): Board
   list(where: ListWhereUniqueInput!): List
   card(where: CardWhereUniqueInput!): Card

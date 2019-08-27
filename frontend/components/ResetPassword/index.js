@@ -5,6 +5,7 @@ import Error from "../Error";
 import Link from "next/link";
 import styled, { keyframes } from "styled-components";
 import { CURRENT_USER_QUERY } from "../User";
+import Router from "next/router";
 
 const RESET_MUTATION = gql`
   mutation RESET_MUTATION(
@@ -125,6 +126,9 @@ class ResetPassword extends React.Component {
                 const res = await reset();
 
                 this.setState({ password: "", confirmPassword: "" });
+                Router.push({
+                  pathname: "/dashboard"
+                });
               }}
             >
               <fieldset disabled={loading} aria-busy={loading}>
