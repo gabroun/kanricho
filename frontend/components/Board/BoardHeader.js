@@ -117,7 +117,7 @@ class BoardHeader extends React.Component {
             }}
           </Query>
         </div>
-        <BoardDeleter id={this.props.id} />
+        <BoardDeleter id={this.props.id} refetch={this.props.refetch} />
       </S.BoardHeader>
     );
   }

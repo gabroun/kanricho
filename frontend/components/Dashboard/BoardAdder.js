@@ -1,13 +1,12 @@
 import React from "react";
-import slugify from "slugify";
-
-import { Mutation } from "react-apollo";
+import { Mutation, Query } from "react-apollo";
 import gql from "graphql-tag";
-import { ALL_BOARDS_QUERY } from "../Dashboard/Boards";
 import Router from "next/router";
 import Error from "../Error";
 import * as S from "./_boardAdder";
 import ClickOutside from "../ClickOutside";
+import { ALL_BOARDS_QUERY } from "../Dashboard/Boards";
+import { CURRENT_USER_QUERY } from "../User";
 
 const CREATE_BOARD_MUTATION = gql`
   mutation CREATE_BOARD_MUTATION($title: String!) {
@@ -47,9 +46,12 @@ class BoardAdder extends React.Component {
     });
   }
 
-  update(cache, payload) {
+  update(cache, payload, email) {
     const data = cache.readQuery({
-      query: ALL_BOARDS_QUERY
+      query: ALL_BOARDS_QUERY,
+      variables: {
+        email
+      }
     });
     const newBoard = {
       title: payload.data.createBoard.title,
@@ -63,64 +65,72 @@ class BoardAdder extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <S.BoardAdder>
-          <div>
-            {this.state.isVisible ? (
-              <ClickOutside handleClickOutside={this.handleToggleOpen}>
-                <Mutation
-                  mutation={CREATE_BOARD_MUTATION}
-                  variables={this.state}
-                  update={this.update}
-                >
-                  {/* createBoard is the parameter name for mutation function */}
-                  {(createBoard, { loading, error }) => (
-                    <>
-                      <Error error={error} />
-                      <form
-                        className="board-adder__form"
-                        onSubmit={async e => {
-                          // stop form from submitting
-                          e.preventDefault();
-                          // call the mutation
-                          const res = await createBoard();
-                          const boardID = res.data.createBoard.id;
-
-                          // change them to single item page
-
-                          Router.push({
-                            pathname: "/board",
-                            query: { id: boardID }
-                          });
-                        }}
+        <Query query={CURRENT_USER_QUERY}>
+          {({ data: { me }, loading }) => {
+            return (
+              <S.BoardAdder>
+                <div>
+                  {this.state.isVisible ? (
+                    <ClickOutside handleClickOutside={this.handleToggleOpen}>
+                      <Mutation
+                        mutation={CREATE_BOARD_MUTATION}
+                        variables={this.state}
+                        update={(cache, payload) =>
+                          this.update(cache, payload, me.email)
+                        }
                       >
-                        <fieldset disabled={loading} aria-busy={loading}>
-                          <input
-                            type="text"
-                            value={this.state.title}
-                            onChange={this.handleChange}
-                          />
-                          <button
-                            className="submit-board"
-                            disabled={this.state.title === ""}
-                          >
-                            Create
-                          </button>
-                        </fieldset>
-                      </form>
-                    </>
+                        {/* createBoard is the parameter name for mutation function */}
+                        {(createBoard, { loading, error }) => (
+                          <>
+                            <Error error={error} />
+                            <form
+                              className="board-adder__form"
+                              onSubmit={async e => {
+                                // stop form from submitting
+                                e.preventDefault();
+                                // call the mutation
+                                const res = await createBoard();
+                                const boardID = res.data.createBoard.id;
+
+                                // change them to single item page
+
+                                Router.push({
+                                  pathname: "/board",
+                                  query: { id: boardID }
+                                });
+                              }}
+                            >
+                              <fieldset disabled={loading} aria-busy={loading}>
+                                <input
+                                  type="text"
+                                  value={this.state.title}
+                                  onChange={this.handleChange}
+                                />
+                                <button
+                                  className="submit-board"
+                                  disabled={this.state.title === ""}
+                                >
+                                  Create
+                                </button>
+                              </fieldset>
+                            </form>
+                          </>
+                        )}
+                      </Mutation>
+                    </ClickOutside>
+                  ) : (
+                    <button
+                      onClick={this.handleToggleOpen}
+                      className="board-adder__btn"
+                    >
+                      Create new board..
+                    </button>
                   )}
-                </Mutation>
-              </ClickOutside>
-            ) : (
-              <button
-                onClick={this.handleToggleOpen}
-                className="board-adder__btn"
-              >
-                Create new board..
-              </button>
-            )}
-          </div>
-        </S.BoardAdder>
+                </div>
+              </S.BoardAdder>
+            );
+          }}
+        </Query>
       </React.Fragment>
     );
   }
