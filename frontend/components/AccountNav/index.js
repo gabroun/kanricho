@@ -36,6 +36,7 @@ const StyledAccountMenu = styled.div`
   margin-top: 10px;
   text-align: center;
   right: 0;
+  z-index: 1;
   .account-menu {
     display: flex;
     flex-direction: column;
@@ -51,6 +52,9 @@ const StyledAccountMenu = styled.div`
       margin: 2px 0px;
       text-align: left;
       border: none;
+    }
+    button {
+      cursor: pointer;
     }
   }
   .account-arrow {
