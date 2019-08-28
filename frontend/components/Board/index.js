@@ -8,7 +8,7 @@ import { Query } from "react-apollo";
 import Error from "../Error";
 import Loading from "../Loading";
 
-import * as S from  "./_board";
+import * as S from "./_board";
 
 const SINGLE_BOARD_QUERY = gql`
   query SINGLE_BOARD_QUERY($id: ID!) {
@@ -25,12 +25,11 @@ const SINGLE_BOARD_QUERY = gql`
 
 class Board extends React.Component {
   render() {
-    const {id} = this.props.query;
+    const { id } = this.props.query;
 
     return (
       <React.Fragment>
         <S.Board className="board">
-
           <Query
             query={SINGLE_BOARD_QUERY}
             variables={{ id: id }}
@@ -44,10 +43,7 @@ class Board extends React.Component {
 
               return (
                 <React.Fragment>
-                  <BoardHeader
-                    title={title}
-                    id={id}
-                  />
+                  <BoardHeader title={title} id={id} refetch={refetch} />
                   <div className="board__list-wrapper">
                     <div className="board__lists">
                       {lists.map((list, index) => {
@@ -68,7 +64,6 @@ class Board extends React.Component {
                       />
                     </div>
                   </div>
-
                 </React.Fragment>
               );
             }}

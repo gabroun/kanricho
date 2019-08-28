@@ -26,7 +26,7 @@ class BoardDeleter extends React.Component {
     this.update = this.update.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
-  update(cache, payload, email) {
+  update(cache, payload, email, refetch) {
     // manually update the cache on the client to match the server
     // read the cache for the items
     const data = cache.readQuery({
@@ -41,21 +41,36 @@ class BoardDeleter extends React.Component {
     });
     // put the items back
     cache.writeQuery({ query: ALL_BOARDS_QUERY, data });
+
+    refetch();
   }
   handleClick() {
     this.setState({ isOpen: !this.state.isOpen });
   }
   render() {
+    const { refetch } = this.props;
     return (
       <Query query={CURRENT_USER_QUERY}>
         {({ data: { me }, loading }) => {
+          const { email } = me;
           return (
             <Mutation
               mutation={DELETE_BOARD_MUTATION}
               variables={{
                 id: this.props.id
               }}
-              update={(cache, payload) => this.update(cache, payload, me.email)}
+              refetchQueries={[
+                {
+                  query: ALL_BOARDS_QUERY,
+                  variables: {
+                    email
+                  }
+                }
+              ]}
+
+              // update={(cache, payload) =>
+              //   this.update(cache, payload, email, refetch)
+              // }
             >
               {(deleteBoard, { error }) => {
                 if (error) return <Error error={error} />;
