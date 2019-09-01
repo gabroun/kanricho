@@ -78,7 +78,7 @@ class CardAdder extends React.Component {
   }
 
   render() {
-    const { refetch } = this.props;
+    const { refetch, listColor } = this.props;
     return (
       <React.Fragment>
         <S.CardAdder className="card-adder">

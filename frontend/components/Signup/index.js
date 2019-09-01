@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import Error from "../Error";
 import StyledForm from "./_signup";
 import { CURRENT_USER_QUERY } from "../User";
+import Router from "next/router";
 
 const SIGNUP_MUTATION = gql`
   mutation SINGUP_MUTATION(
@@ -48,6 +49,9 @@ class Signup extends React.Component {
                 const res = await signup();
 
                 this.setState({ name: "", email: "", password: "" });
+                Router.push({
+                  pathname: "/dashboard"
+                });
               }}
             >
               <fieldset disabled={loading} aria-busy={loading}>
