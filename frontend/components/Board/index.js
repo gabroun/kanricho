@@ -1,12 +1,12 @@
 import React from "react";
 import BoardHeader from "./BoardHeader";
-import Header from "../Header";
 import ListAdder from "../List/ListAdder";
 import List from "../List";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Error from "../Error";
 import Loading from "../Loading";
+import Link from "next/link";
 
 import * as S from "./_board";
 

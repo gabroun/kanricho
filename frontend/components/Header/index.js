@@ -1,10 +1,8 @@
-// import Nav from './Nav';
-import styled from "styled-components";
 import Link from "next/link";
 import NProgress from "nprogress";
 import Router from "next/router";
-import User from "../User";
-import Signout from "../Signout";
+import styled from "styled-components";
+
 import AccountNav from "../AccountNav";
 
 Router.onRouteChangeStart = () => {
@@ -18,9 +16,14 @@ Router.onRouteChangeError = () => {
 };
 
 const StyledHeader = styled.header`
-  height: 32px;
-  background: #00000059;
-  padding: 30px 0;
+  background: #4ecdc4;
+  background-image: linear-gradient(
+    to right,
+    #4ecdc4 0%,
+    #ff6b6b 50%,
+    #4ecdc4 100%
+  );
+  padding: 20px 0;
   width: 100%;
   display: grid;
   grid-template-columns: 0.2fr 1fr 0.2fr;
@@ -41,6 +44,7 @@ const StyledHeader = styled.header`
     margin: 0;
     text-align: center;
     font-size: 1.7rem;
+    letter-spacing: 6px;
     @media screen and (max-width: 767px) {
       font-size: 24px;
       line-height: 24px;
@@ -52,7 +56,7 @@ const StyledSvg = styled.svg`
   width: 100%;
   height: 35px;
   path {
-    fill: #00000059;
+    fill: url(#gradient);
   }
 `;
 const Header = () => {
@@ -63,7 +67,7 @@ const Header = () => {
         <div className="header__container">
           <Link href="/">
             <a>
-              <h1 className="header__title">Task Management</h1>
+              <h1 className="header__title">Kanricho</h1>
             </a>
           </Link>
         </div>
@@ -76,6 +80,11 @@ const Header = () => {
         role="presentation"
         preserveAspectRatio="none"
       >
+        <linearGradient id="gradient">
+          <stop className="main-stop" offset="0%" stopColor="#4ecdc4" />
+          <stop className="half-stop" offset="50%" stopColor="#FF6B6B" />
+          <stop className="alt-stop" offset="100%" stopColor="#4ecdc4" />
+        </linearGradient>
         <path className="triangle-path" d="M0 0l503 500L500 0H0z" />
       </StyledSvg>
     </React.Fragment>

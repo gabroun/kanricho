@@ -1,32 +1,35 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 export const ListContainer = styled.div`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
   .list {
     box-sizing: border-box;
     /* width: 300px; */
     min-height: 0;
     max-height: 100%;
-    margin: 0 5px;
+    /* margin: 0 5px; */
     border-radius: 6px;
     font-size: 14px;
     transition: box-shadow 0.15s, background 0.3s;
-    background: rgba(50, 60, 80, 0.75);
+    background: #f7fff7;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    padding-bottom: 10px;
 
     &__header {
-       /* display: flex;
+      /* display: flex;
        flex-shrink: 0;
        border-top-right-radius: 6px;
        border-top-left-radius: 6px;
       font-size: 18px;
        justify-content: space-between; */
-       display: grid;
-    grid-template-columns: 1fr 130px 50px;
-    grid-gap: 10px;
-    padding: 0 0.5rem;
-    margin: 8px 5px 0;
+      display: grid;
+      grid-template-columns: 1fr 130px 50px;
+      grid-gap: 2px;
+      padding: 0 0.5rem;
+      margin: 8px 5px 0;
 
       &-wrapper {
         input {
@@ -41,7 +44,7 @@ export const ListContainer = styled.div`
         border: none;
         background-color: transparent;
         font-size: 16px;
-        color: #fbfbfb;
+        color: #073b4c;
         font-weight: 700;
         overflow-wrap: break-word;
         cursor: pointer;
@@ -52,18 +55,22 @@ export const ListContainer = styled.div`
       &-priority {
         justify-self: center;
         align-self: center;
-        color: #fbfbfb;
+        color: #073b4c;
+        font-weight: 700;
       }
 
       &-extra {
         padding: 10px;
-        color: white;
+        color: #073b4c;
         font-size: 20px;
         position: relative;
         justify-self: center;
         line-height: 10px;
+        > a {
+          font-weight: 700;
+        }
         a {
-          color: white;
+          color: #073b4c;
           text-decoration: none;
         }
 
@@ -111,8 +118,8 @@ export const ListContainer = styled.div`
       }
     }
   }
-  `;
- export const Cards = styled.div`
+`;
+export const Cards = styled.div`
   border-radius: 0.2rem;
-    padding: 0 0.5rem;
- `;
+  padding: 0 8px;
+`;

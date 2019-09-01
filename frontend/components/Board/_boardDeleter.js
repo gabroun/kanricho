@@ -1,16 +1,16 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const BoardDeleter = styled.div`
   position: relative;
-    font-size: 16px;
-.board-deleter {
+  font-size: 16px;
+  .board-deleter {
     &__btn {
       display: flex;
       justify-content: space-around;
       align-items: center;
       padding: 8px 10px;
       border-radius: 3px;
-      color: #444;
+      color: #073b4c;
       transition: background 0.1s;
       cursor: pointer;
       background-color: transparent;
@@ -33,7 +33,7 @@ export const BoardDeleter = styled.div`
       margin-top: 4px;
       padding: 5px;
       border-radius: 3px;
-      color: #222;
+      color: #073b4c;
       background: #fbfbfb;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
       font-weight: 700;
@@ -51,5 +51,3 @@ export const BoardDeleter = styled.div`
     }
   }
 `;
-
-

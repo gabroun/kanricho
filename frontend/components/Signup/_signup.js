@@ -12,13 +12,15 @@ const loading = keyframes`
 `;
 
 const Form = styled.form`
-  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05); */
   background: rgba(0, 0, 0, 0.02);
-  border: 5px solid white;
+  /* border: 5px solid white; */
   padding: 20px;
   font-size: 1rem;
   line-height: 1;
   font-weight: 600;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.3);
+  color: #073b4c;
   label {
     display: block;
     margin-bottom: 1rem;
@@ -38,7 +40,7 @@ const Form = styled.form`
   button,
   input[type="submit"] {
     width: auto;
-    background: red;
+    background: #ff6b6b;
     color: white;
     border: 0;
     font-size: 1.5rem;
@@ -57,9 +59,9 @@ const Form = styled.form`
       display: block;
       background-image: linear-gradient(
         to right,
-        #ff3019 0%,
-        #e2b04a 50%,
-        #ff3019 100%
+        #ef476f 0%,
+        #ffd166 50%,
+        #ef476f 100%
       );
     }
     &[aria-busy="true"]::before {

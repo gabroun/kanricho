@@ -44,11 +44,6 @@ class CardAdder extends React.Component {
     if (e.keyCode === 13 && event.shiftKey === false) {
       e.preventDefault();
       const res = await createCard();
-
-      // this.setState({
-      //   isOpen: !this.state.isOpen,
-      //   cardContent: ""
-      // });
     } else if (e.keyCode === 27) {
       this.setState({
         isOpen: !this.state.isOpen,

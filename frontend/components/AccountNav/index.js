@@ -8,7 +8,7 @@ import ClickOutside from "../ClickOutside";
 const StyledIcon = styled.div`
   width: 30px;
   height: 30px;
-  background-color: #3d5866;
+  background-color: #1a535c;
   font-size: 14px;
   font-weight: 600;
   color: white;
@@ -54,6 +54,7 @@ const StyledAccountMenu = styled.div`
       border: none;
     }
     button {
+      background-color: transparent;
       cursor: pointer;
     }
   }

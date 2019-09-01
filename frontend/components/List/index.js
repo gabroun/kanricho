@@ -165,6 +165,7 @@ class List extends React.Component {
                 if (error) return <Error error={error} />;
                 if (loading) return <p>Loading!</p>;
                 const { cards, color } = data.list;
+
                 return cards.map((card, index) => {
                   return (
                     <Card
