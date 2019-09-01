@@ -55,6 +55,7 @@ const StyledAccountMenu = styled.div`
     }
     button {
       background-color: transparent;
+      cursor: pointer;
     }
   }
   .account-arrow {

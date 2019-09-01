@@ -20,6 +20,7 @@ server.express.use((req, res, next) => {
 })
 // todo use express middleware to populate current user
 
+
 // start it
 server.start(
   {
