@@ -44,11 +44,6 @@ class CardAdder extends React.Component {
     if (e.keyCode === 13 && event.shiftKey === false) {
       e.preventDefault();
       const res = await createCard();
-
-      // this.setState({
-      //   isOpen: !this.state.isOpen,
-      //   cardContent: ""
-      // });
     } else if (e.keyCode === 27) {
       this.setState({
         isOpen: !this.state.isOpen,
@@ -78,7 +73,7 @@ class CardAdder extends React.Component {
   }
 
   render() {
-    const { refetch, listColor } = this.props;
+    const { refetch } = this.props;
     return (
       <React.Fragment>
         <S.CardAdder className="card-adder">
