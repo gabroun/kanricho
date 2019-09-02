@@ -3,16 +3,13 @@ const { ApolloServer } = require("apollo-server");
 const Mutation = require("./resolvers/Mutation");
 const Query = require("./resolvers/Query");
 const db = require("./db");
-const path = require("path");
-const { importSchema } = require("graphql-import");
-require("dotenv").config({ path: ".env" });
 
-const typeDefs = importSchema(path.resolve(__dirname + "/schema.graphql"));
+require("dotenv").config({ path: ".env" });
 
 // create the GraphQL Yoga Server
 function createServer() {
   return new GraphQLServer({
-    typeDefs,
+    typeDefs: `${__dirname  }/schema.graphql`,
     resolvers: {
       Mutation,
       Query
