@@ -23,7 +23,7 @@ const Inner = styled.div`
   max-width: ${props => props.theme.maxwidth};
   margin: 0 auto;
   padding: 2rem;
-  background-color: #f7fff7;
+  /* background-color: #f7fff7; */
   @media screen and (max-width: 767px) {
     padding: 0;
   }
@@ -45,7 +45,7 @@ injectGlobal`
         line-height: 2; */
         font-family: Helvetica Neue, Segoe UI, Trebuchet MS, Geneva, Tahoma, sans-serif;
         height: 100%;
-        background-color: #F7FFF7;
+        /* background-color: #F7FFF7; */
     }
     a {
         text-decoration: none;

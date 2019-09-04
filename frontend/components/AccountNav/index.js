@@ -8,7 +8,7 @@ import ClickOutside from "../ClickOutside";
 const StyledIcon = styled.div`
   width: 30px;
   height: 30px;
-  background-color: #1a535c;
+  background-color: #073b4c;
   font-size: 14px;
   font-weight: 600;
   color: white;

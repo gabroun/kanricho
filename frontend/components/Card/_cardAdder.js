@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CardAdder = styled.div`
   display: flex;
   /* justify-content: center; */
-  background: #f7fff7;
+  /* background: #f7fff7; */
   /* margin: 0 5px; */
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;

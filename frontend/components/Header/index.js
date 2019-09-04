@@ -19,9 +19,9 @@ const StyledHeader = styled.header`
   background: #4ecdc4;
   background-image: linear-gradient(
     to right,
-    #4ecdc4 0%,
-    #ff6b6b 50%,
-    #4ecdc4 100%
+    #118ab2 0%,
+    #ef476f 50%,
+    #118ab2 100%
   );
   padding: 20px 0;
   width: 100%;
@@ -81,9 +81,9 @@ const Header = () => {
         preserveAspectRatio="none"
       >
         <linearGradient id="gradient">
-          <stop className="main-stop" offset="0%" stopColor="#4ecdc4" />
-          <stop className="half-stop" offset="50%" stopColor="#FF6B6B" />
-          <stop className="alt-stop" offset="100%" stopColor="#4ecdc4" />
+          <stop className="main-stop" offset="0%" stopColor="#118AB2" />
+          <stop className="half-stop" offset="50%" stopColor="#EF476F" />
+          <stop className="alt-stop" offset="100%" stopColor="#118AB2" />
         </linearGradient>
         <path className="triangle-path" d="M0 0l503 500L500 0H0z" />
       </StyledSvg>
