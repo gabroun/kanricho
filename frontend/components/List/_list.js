@@ -13,7 +13,7 @@ export const ListContainer = styled.div`
     border-radius: 6px;
     font-size: 14px;
     transition: box-shadow 0.15s, background 0.3s;
-    background: #f7fff7;
+    /* background: #f7fff7; */
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     padding-bottom: 10px;

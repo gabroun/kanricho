@@ -12,14 +12,13 @@ const loading = keyframes`
 `;
 
 const Form = styled.form`
-  /* box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05); */
-  background: rgba(0, 0, 0, 0.02);
-  /* border: 5px solid white; */
   padding: 20px;
-  font-size: 1rem;
   line-height: 1;
-  font-weight: 600;
-  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.3);
+  font-weight: 400;
+  font-size: 15px;
+
+  background: rgba(255, 255, 255, 1);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 9px 25px 0px;
   color: #073b4c;
   label {
     display: block;
@@ -31,7 +30,8 @@ const Form = styled.form`
     width: 100%;
     padding: 0.5rem;
     font-size: 1rem;
-    border: 1px solid black;
+    border: 1px solid #c3c3c3;
+    margin-top: 8px;
     &:focus {
       outline: 0;
       border-color: ${props => props.theme.red};
@@ -40,7 +40,7 @@ const Form = styled.form`
   button,
   input[type="submit"] {
     width: auto;
-    background: #ff6b6b;
+    background: #118ab2;
     color: white;
     border: 0;
     font-size: 1.5rem;
@@ -60,7 +60,7 @@ const Form = styled.form`
       background-image: linear-gradient(
         to right,
         #ef476f 0%,
-        #ffd166 50%,
+        #118ab2 50%,
         #ef476f 100%
       );
     }

@@ -12,9 +12,9 @@ export const BoardsContainer = styled.div`
       background: #06a;
       background-image: linear-gradient(
         to right,
-        #4ecdc4 0%,
-        #ff6b6b 50%,
-        #4ecdc4 100%
+        #118ab2 0%,
+        #ef476f 50%,
+        #118ab2 100%
       );
       box-sizing: border-box;
       height: 140px;
