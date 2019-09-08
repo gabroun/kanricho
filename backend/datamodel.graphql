@@ -43,4 +43,5 @@ type Card {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   list: List!
+  priority: String
 }

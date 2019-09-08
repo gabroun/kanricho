@@ -8,8 +8,16 @@ import ClickOutside from "../ClickOutside";
 import * as S from "./_cardAdder";
 
 const CREATE_CARD_MUTATION = gql`
-  mutation CREATE_CARD_MUTATION($content: String!, $listId: ID!) {
-    createCard(content: $content, list: { connect: { id: $listId } }) {
+  mutation CREATE_CARD_MUTATION(
+    $content: String!
+    $listId: ID!
+    $priority: String
+  ) {
+    createCard(
+      content: $content
+      list: { connect: { id: $listId } }
+      priority: $priority
+    ) {
       id
       content
       list {
@@ -83,7 +91,8 @@ class CardAdder extends React.Component {
                 mutation={CREATE_CARD_MUTATION}
                 variables={{
                   content: this.state.cardContent,
-                  listId: this.props.listId
+                  listId: this.props.listId,
+                  priority: ""
                 }}
                 update={(cache, payload) =>
                   this.update(cache, payload, refetch)

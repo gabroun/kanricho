@@ -3,10 +3,10 @@ import Modal from "react-modal";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import Error from "../Error";
-import * as S from  "./_cardModal";
-// import "./cardModal.css";
+import * as S from "./_cardModal";
+
 const UPDATE_CARD_MUTATION = gql`
-  mutation UPDATE_CARD_MUTATION($id: ID!, $content: String!) {
+  mutation UPDATE_CARD_MUTATION($id: ID!, $content: String) {
     updateCard(id: $id, content: $content) {
       content
       id
@@ -122,9 +122,10 @@ class CardModal extends React.Component {
             }}
           </Mutation>
         </S.TextAreaWrapper>
-     </Modal>
+      </Modal>
     );
   }
 }
 
 export default CardModal;
+export { UPDATE_CARD_MUTATION };
