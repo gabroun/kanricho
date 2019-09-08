@@ -11,7 +11,7 @@
     "build": "node src/index.js",
     "writeSchema": "node src/writeSchema.js"
   },
-  "author": "",
+  "author": "Malik Elgabroun",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.8.1",

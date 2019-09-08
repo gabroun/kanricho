@@ -331,6 +331,7 @@ type Card {
   createdAt: DateTime!
   updatedAt: DateTime!
   list: List!
+  priority: String
 }
 
 type CardConnection {
@@ -343,6 +344,7 @@ input CardCreateInput {
   id: ID
   content: String!
   list: ListCreateOneWithoutCardsInput!
+  priority: String
 }
 
 input CardCreateManyWithoutListInput {
@@ -353,6 +355,7 @@ input CardCreateManyWithoutListInput {
 input CardCreateWithoutListInput {
   id: ID
   content: String!
+  priority: String
 }
 
 type CardEdge {
@@ -369,6 +372,8 @@ enum CardOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  priority_ASC
+  priority_DESC
 }
 
 type CardPreviousValues {
@@ -376,6 +381,7 @@ type CardPreviousValues {
   content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  priority: String
 }
 
 input CardScalarWhereInput {
@@ -423,6 +429,20 @@ input CardScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  priority: String
+  priority_not: String
+  priority_in: [String!]
+  priority_not_in: [String!]
+  priority_lt: String
+  priority_lte: String
+  priority_gt: String
+  priority_gte: String
+  priority_contains: String
+  priority_not_contains: String
+  priority_starts_with: String
+  priority_not_starts_with: String
+  priority_ends_with: String
+  priority_not_ends_with: String
   AND: [CardScalarWhereInput!]
   OR: [CardScalarWhereInput!]
   NOT: [CardScalarWhereInput!]
@@ -449,14 +469,17 @@ input CardSubscriptionWhereInput {
 input CardUpdateInput {
   content: String
   list: ListUpdateOneRequiredWithoutCardsInput
+  priority: String
 }
 
 input CardUpdateManyDataInput {
   content: String
+  priority: String
 }
 
 input CardUpdateManyMutationInput {
   content: String
+  priority: String
 }
 
 input CardUpdateManyWithoutListInput {
@@ -478,6 +501,7 @@ input CardUpdateManyWithWhereNestedInput {
 
 input CardUpdateWithoutListDataInput {
   content: String
+  priority: String
 }
 
 input CardUpdateWithWhereUniqueWithoutListInput {
@@ -537,6 +561,20 @@ input CardWhereInput {
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
   list: ListWhereInput
+  priority: String
+  priority_not: String
+  priority_in: [String!]
+  priority_not_in: [String!]
+  priority_lt: String
+  priority_lte: String
+  priority_gt: String
+  priority_gte: String
+  priority_contains: String
+  priority_not_contains: String
+  priority_starts_with: String
+  priority_not_starts_with: String
+  priority_ends_with: String
+  priority_not_ends_with: String
   AND: [CardWhereInput!]
   OR: [CardWhereInput!]
   NOT: [CardWhereInput!]

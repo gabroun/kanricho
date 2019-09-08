@@ -17,11 +17,11 @@ type Mutation {
     board: BoardCreateOneWithoutListsInput!
     color: String
   ): List!
-  createCard(content: String!, list: ListCreateOneWithoutCardsInput!): Card!
+  createCard(content: String!, list: ListCreateOneWithoutCardsInput!, priority: String): Card!
   deleteList(id: ID!): List!
   deleteCard(id: ID!): Card!
   updateList(id: ID!, title: String): List!
-  updateCard(id: ID!, content: String): Card!
+  updateCard(id: ID!, content: String, priority: String): Card!
 }
 
 type Query {
