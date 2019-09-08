@@ -8,7 +8,7 @@ export const CardContainer = styled.div`
     /* margin: 8px 5px 0; */
     color: #073b4c;
     background-color: white;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 6px;
     display: grid;
     grid-template-columns: 8px 1fr;
@@ -100,14 +100,62 @@ export const CardContainer = styled.div`
       }
     }
     &__priority {
-      background-color: white;
-      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
-      border-radius: 6px;
-      text-align: center;
-      display: flex;
-      justify-content: center;
+      position: relative;
+      &-selected {
+        background-color: white;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 6px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
+        height: 100%;
+        align-items: center;
+        color: #fff;
+      }
+      .status-options-menu {
+        position: relative;
+      }
       .status {
         align-self: center;
+      }
+      .status-arrow {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: -4px;
+        left: 50px;
+        z-index: 2;
+        transform: rotate(90deg);
+        fill: white;
+      }
+      .status-options {
+        position: absolute;
+        top: 100%;
+        border: 1px solid #c4c4c4;
+        background-color: white;
+        box-shadow: 0 8px 16px 0px rgba(0, 0, 0, 0.32);
+        border-radius: 4px;
+        font-size: 13px;
+        transition: width 0.1s;
+        pointer-events: all;
+        padding: 16px;
+        margin-top: 6px;
+        z-index: 1;
+        &-item {
+          background-color: lightblue;
+          height: 32px;
+          width: 112px;
+          line-height: 32px;
+          margin-bottom: 8px;
+          border-radius: 2px;
+          color: #ffffff;
+          font-weight: 400;
+          cursor: pointer;
+          transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
+          text-align: center;
+        }
       }
     }
   }

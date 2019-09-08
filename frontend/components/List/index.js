@@ -17,6 +17,7 @@ const SINGLE_LIST_QUERY = gql`
       cards {
         content
         id
+        priority
       }
     }
   }

@@ -1,7 +1,7 @@
 {
-  "name": "task-management",
+  "name": "kanricho",
   "version": "1.0.0",
-  "description": "",
+  "description": "a task management app",
   "main": "index.js",
   "scripts": {
     "dev": "next -p 7777",
@@ -10,7 +10,7 @@
     "test": "NODE_ENV=test jest --watch",
     "heroku-postbuild": "next build"
   },
-  "author": "",
+  "author": "Malik Elgabroun",
   "license": "ISC",
   "dependencies": {
     "apollo-boost": "^0.4.4",
