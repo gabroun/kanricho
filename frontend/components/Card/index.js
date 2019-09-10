@@ -67,8 +67,6 @@ class Card extends React.Component {
     });
 
     cache.writeQuery({ query: SINGLE_LIST_QUERY, data });
-    refetch();
-    // location.reload();
   }
 
   handleModalClick() {
@@ -216,9 +214,17 @@ class Card extends React.Component {
                   update={(cache, payload) =>
                     this.update(cache, payload, refetch)
                   }
+                  optimisticResponse={{
+                    __typename: "Mutation",
+                    deleteCard: {
+                      id: this.props.id,
+                      __typename: "Card"
+                    }
+                  }}
                 >
                   {(deleteCard, { error }) => {
                     if (error) return <Error error={error} />;
+
                     return (
                       <button
                         onClick={() => {
