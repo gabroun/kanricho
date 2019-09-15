@@ -29,7 +29,6 @@ class ListDeleter extends React.Component {
     });
 
     cache.writeQuery({ query: SINGLE_BOARD_QUERY, data });
-    refetch();
   }
   render() {
     const { refetch } = this.props;
@@ -38,6 +37,13 @@ class ListDeleter extends React.Component {
         mutation={DELETE_LIST_MUTATION}
         variables={{ id: this.props.listId }}
         update={(cache, payload) => this.update(cache, payload, refetch)}
+        optimisticResponse={{
+          __typename: "Mutation",
+          deleteList: {
+            id: this.props.listId,
+            __typename: "List"
+          }
+        }}
       >
         {(deleteList, { error }) => {
           if (error) return <Error error={error} />;

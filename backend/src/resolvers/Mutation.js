@@ -94,12 +94,12 @@ const Mutations = {
      // create the JWT for them
      const token = jwt.sign({userId: user.id}, process.env.APP_SECRET);
 
-
      // we set the jwt as cookie on the response
      ctx.response.cookie('token', token, {
-       httpOnly: true,
-       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
-     });
+      domain: process.env.NODE_ENV === 'production' ? '.kanricho.com': 'localhost',
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
+    });
 
      // we return the user to the browser
      return user;
@@ -121,6 +121,7 @@ const Mutations = {
     const token = jwt.sign({userId: user.id}, process.env.APP_SECRET);
     // set the cookie with the token
     ctx.response.cookie('token', token, {
+      domain: process.env.NODE_ENV === 'production' ? '.kanricho.com': 'localhost',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
     });
@@ -129,7 +130,9 @@ const Mutations = {
 
   },
   signout(parent, args, ctx, info) {
-    ctx.response.clearCookie('token');
+    ctx.response.clearCookie('token', {
+      domain: process.env.NODE_ENV === 'production' ? '.kanricho.com': 'localhost',
+    });
     return {
       message: 'GoodBye!'
     }
@@ -194,6 +197,7 @@ const Mutations = {
 
     // set the JWT cookie
     ctx.response.cookie('token', token, {
+      domain: process.env.NODE_ENV === 'production' ? '.kanricho.com': 'localhost',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
     });
