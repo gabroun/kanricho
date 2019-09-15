@@ -1,2 +1,2 @@
-export const prodEndpoint = `https://kanricho-backend.gabroun.now.sh/`;
+export const prodEndpoint = `https://api.kanricho.com/`;
 export const endpoint = `http://localhost:5555`;

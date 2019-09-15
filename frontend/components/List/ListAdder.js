@@ -31,7 +31,7 @@ const CREATE_LIST_MUTATION = gql`
 class ListAdder extends React.Component {
   constructor(props) {
     super(props);
-    // mintCream: "#F7FFF7",
+
     this.state = {
       isOpen: false,
       listTitle: "",
@@ -78,13 +78,6 @@ class ListAdder extends React.Component {
       // enter key
       e.preventDefault();
       const res = await createList();
-
-      // this.setState(() => {
-      //   return {
-      //     isOpen: !this.state.isOpen,
-      //     listTitle: ""
-      //   };
-      // });
     } else if (e.keyCode === 27) {
       // escape key
       this.setState(() => {
